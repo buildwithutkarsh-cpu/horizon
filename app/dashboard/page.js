@@ -21,7 +21,7 @@ export default function Dash() {
   return (
     <main className="panel wide">
       <div className="row"><span className="u">Dashboard</span><button className="pill" onClick={out}>Log out</button></div>
-      <h1>Hi, {me.username}</h1>
+      <h1>Hi, {me.name}</h1>
       {me.team ? (
         <div className="team">
           <span className="u">Your team</span>
