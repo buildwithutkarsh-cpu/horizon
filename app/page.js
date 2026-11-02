@@ -1,11 +1,28 @@
 import Link from "next/link";
 import Motion from "@/components/Motion";
 import { sessionUid } from "@/lib/auth";
+
+function WaveText({ text }) {
+  return (
+    <>
+      {Array.from(text, (character, index) => (
+        <span
+          className="ch"
+          aria-hidden="true"
+          key={index}
+          style={{ animationDelay: `${index * 0.15}s` }}
+        >
+          {character}
+        </span>
+      ))}
+    </>
+  );
+}
+
 export default async function Home() {
   const authed = !!(await sessionUid());
   return (<>
     <Motion />
-    <div className="ld" id="ld" aria-hidden="true"><div className="lt"><span>Horizon.Hacks</span><span>Loading · May 2027</span></div><b id="lnum">0</b><i className="lb" /></div>
     <nav><a className="u" href="#dates">Dates</a><a className="u" href="#about">About</a><a className="mk" href="#top">H.</a>
       <span className="navr">{!authed && <Link className="u" href="/login">Log in</Link>}<Link className="pill" href={authed ? "/dashboard" : "/register"}>{authed ? "Dashboard" : "Register"}</Link></span></nav>
     <main id="top">
@@ -15,8 +32,8 @@ export default async function Home() {
       </header>
       <section className="ty" aria-label="Build past the edge">
         <div className="badge" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="bc" d="M100 100m-80 0a80 80 0 1 1 160 0a80 80 0 1 1-160 0" /></defs><text><textPath href="#bc">Build past the edge • May 2027 • </textPath></text></svg><b>H</b></div>
-        <p className="a slide l" data-wave>Build</p><p className="b">different</p><p className="c slide r" data-wave>Past</p>
-        <p className="d">the</p><p className="e slide l" data-wave>Edge</p>
+        <p className="a slide l" aria-label="Build"><WaveText text="Build" /></p><p className="b">different</p><p className="c slide r" aria-label="Past"><WaveText text="Past" /></p>
+        <p className="d">the</p><p className="e slide l" aria-label="Edge"><WaveText text="Edge" /></p>
         <p className="f"><span>No</span><i>&amp;</i><span>Rules</span></p>
         <p className="g2"><b>Ship</b><span>/</span><b>Break</b><span>/</span><b>Repeat</b><span>/</span><b>Win</b></p>
       </section>
